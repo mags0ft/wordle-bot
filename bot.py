@@ -95,6 +95,24 @@ def main() -> None:
     r: int = 0
     filters: list = []
 
+    print(
+        """Welcome to the Wordle solving assistant!
+It will help you to solve fun little Wordle puzzles by making guesses.
+After entering them, you need to provide feedback on the guesses.
+
+Feedback format, always write it in front of each letter:
+    . = gray
+    _ = yellow
+    ! = green
+    - = do not give feedback on this letter
+
+Type "r" to make another guess without giving feedback, which is useful if \
+the current guess is not in the wordlist of the game.
+
+Have fun!
+"""
+    )
+
     while True:
         if r > 0:
             feedback = ""

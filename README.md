@@ -10,3 +10,16 @@ The list is narrowed down until you (hopefully) find the correct word!
 2. put the wordlist in the `wordlists` folder, make sure it's a `.json` list (you can find basic conversion scripts in the `wordlists/utils` folder)
 3. run the script with `python3 ./bot.py`
 4. have fun!
+
+## Feedback format
+
+The bot will help you to solve fun little Wordle puzzles by making guesses.
+After entering them, you need to provide feedback on the guesses.
+
+Feedback format, always write it in front of each letter:
+    . = gray
+    _ = yellow
+    ! = green
+    - = do not give feedback on this letter
+
+Type "r" to make another guess without giving feedback, which is useful if the current guess is not in the wordlist of the game.
