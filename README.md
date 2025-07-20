@@ -1,4 +1,4 @@
-# Wordle-Bot
+# Wordle bot
 
 A simple Wordle bot that gives you tips for the game using basic strategic thinking. The bot uses a list of 5-letter words and tries to guess the correct word by making educated guesses based on the feedback it receives.
 
@@ -17,9 +17,10 @@ The bot will help you to solve fun little Wordle puzzles by making guesses.
 After entering them, you need to provide feedback on the guesses.
 
 Feedback format, always write it in front of each letter:
-    . = gray
-    _ = yellow
-    ! = green
-    - = do not give feedback on this letter
 
-Type "r" to make another guess without giving feedback, which is useful if the current guess is not in the wordlist of the game.
+- `.` = gray
+- `_` = yellow
+- `!` = green
+- `-` = do not give feedback on this letter
+
+Type "`r`" to make another guess without giving feedback, which is useful if the current guess is not in the wordlist of the game.
