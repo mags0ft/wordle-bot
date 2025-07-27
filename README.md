@@ -14,9 +14,9 @@ The list is narrowed down until you (hopefully) find the correct word!
 ## Feedback format
 
 The bot will help you to solve fun little Wordle puzzles by making guesses.
-After entering them, you need to provide feedback on the guesses.
+After entering them, you need to provide feedback to the bot on the guesses.
 
-Feedback format, always write it in front of each letter:
+This is the feedback format used - always write it in front of each letter:
 
 - `.` = gray
 - `_` = yellow
@@ -24,3 +24,9 @@ Feedback format, always write it in front of each letter:
 - `-` = do not give feedback on this letter
 
 Type "`r`" to make another guess without giving feedback, which is useful if the current guess is not in the wordlist of the game.
+
+An example for feedback:
+
+```
+.g_r!e.e.n
+```
