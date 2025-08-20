@@ -30,3 +30,6 @@ An example for feedback:
 ```
 .g_r!e.e.n
 ```
+
+> [!IMPORTANT]
+> There is a known bug in the bot that may cause it to find no matches when two contradictory inputs are made for one character.
