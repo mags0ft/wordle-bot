@@ -14,13 +14,8 @@ def main():
     with open(path.join("wordlists", "wordlist.txt"), "r") as f:
         l = f.readlines()
 
-    converted_list: list = []
-
-    for el in l:
-        converted_list.append(el.strip())
-
     with open(path.join("wordlists", "wordlist.json"), "w") as f:
-        dump(converted_list, f)
+        dump([el.strip() for el in l], f)
 
 
 if __name__ == "__main__":

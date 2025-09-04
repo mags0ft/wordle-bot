@@ -11,10 +11,7 @@ def main():
     Main method to convert the wordlist.
     """
 
-    with open(path.join("wordlists", "encoded-wordlist.json"), "r") as f:
-        l = load(f)
-
-    def convert_letters(num_string: str):
+    def _convert_letters(num_string: str):
         converted = ""
 
         for letter in range(0, len(num_string), 2):
@@ -22,14 +19,12 @@ def main():
             converted += chr(num)
 
         return converted
-
-    converted_list: str = []
-
-    for el in l:
-        converted_list.append(convert_letters(el))
+    
+    with open(path.join("wordlists", "encoded-wordlist.json"), "r") as f:
+        l = load(f)
 
     with open(path.join("wordlists", "encoded-wordlist.json"), "w") as f:
-        dump(converted_list, f)
+        dump([_convert_letters(el) for el in l], f)
 
 
 if __name__ == "__main__":
