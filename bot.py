@@ -17,7 +17,7 @@ def read_wordlist(filename: str) -> "list[str]":
         return [el.upper() for el in json.load(f)]
 
 
-def make_guess(list_: "list[str]", filters):
+def make_guess(list_: "list[str]", filters) -> tuple[str, bool]:
     """
     Applies the filters and finds the best word among the results.
     """
@@ -43,7 +43,9 @@ def make_guess(list_: "list[str]", filters):
         elif points == highest_points:
             highest.append(word)
 
-    return random.choice(highest) if len(highest) > 1 else best_word
+    return random.choice(highest) if len(highest) > 1 else best_word, len(
+        results
+    ) == 1
 
 
 def rate_by_diversity(word: str) -> int:
@@ -130,10 +132,14 @@ Have fun!
             new_filters = generate_filters_from_feedback(feedback)
             filters.extend(new_filters)
 
-        guess = make_guess(wordlist, filters)
+        guess, finished = make_guess(wordlist, filters)
         print("Guess:", guess)
 
         r += 1
+
+        if finished:
+            print("The word has been found!")
+            break
 
 
 if __name__ == "__main__":
