@@ -1,5 +1,6 @@
 """
-Actual implementation of the Wordle bot.
+Actual implementation of the Wordle bot. Handles reading the wordlist, making
+guesses, and generating filters from feedback.
 """
 
 import json
@@ -10,7 +11,13 @@ WORDLIST_FILENAME = "wordlists/wordlist-en.json"
 
 def read_wordlist(filename: str) -> "list[str]":
     """
-    Reads the wordlist.
+    Reads the wordlist from a JSON list file.
+
+    Arguments:
+        filename: The path to the JSON file.
+
+    Returns:
+        A list of words in uppercase.
     """
 
     with open(filename, "r") as f:
@@ -20,6 +27,14 @@ def read_wordlist(filename: str) -> "list[str]":
 def make_guess(list_: "list[str]", filters) -> tuple[str, bool]:
     """
     Applies the filters and finds the best word among the results.
+
+    Arguments:
+        list_: The list of possible words.
+        filters: The list of filter functions to apply.
+
+    Returns:
+        A tuple of the best guess and a boolean indicating if it's the only
+        possible word left.
     """
 
     results = list(filter(lambda el: all(f(el) for f in filters), list_))
@@ -51,6 +66,12 @@ def make_guess(list_: "list[str]", filters) -> tuple[str, bool]:
 def rate_by_diversity(word: str) -> int:
     """
     Diverse letters get more points.
+
+    Arguments:
+        word: The word to rate.
+
+    Returns:
+        The number of unique letters in the word.
     """
 
     letters = set(word)
@@ -61,6 +82,12 @@ def rate_by_diversity(word: str) -> int:
 def generate_filters_from_feedback(feedback: str):
     """
     Generates Filters from feedback.
+
+    Arguments:
+        feedback: The feedback string.
+
+    Returns:
+        A list of filter functions.
     """
 
     generated_filters: list = []
@@ -89,7 +116,8 @@ def generate_filters_from_feedback(feedback: str):
 
 def main() -> None:
     """
-    The main function for using the app.
+    The main function for using the app. Handles user interaction. Also prints
+    instructions and welcomes the user.
     """
 
     wordlist = read_wordlist(WORDLIST_FILENAME)
