@@ -130,6 +130,35 @@ def generate_filters_from_feedback(feedback: str):
     return generated_filters
 
 
+def adjust_states(states: list, feedback: str) -> tuple[list, bool]:
+    """
+    Adjusts the states based on feedback.
+
+    Arguments:
+        states: The current states.
+        feedback: The feedback string.
+
+    Returns:
+        The adjusted states.
+    """
+
+    is_valid: bool = True
+
+    for idx in range(0, len(feedback), 2):
+        set_: str = feedback.upper()[idx : idx + 2]
+        type_: str = {".": 0, "_": 0, "!": 2, "-": states[idx // 2]}[set_[0]]
+
+        if type_ > states[idx // 2]:
+            # tighten character restriction (grey / yellow -> green)
+            states[idx // 2] = type_
+
+        elif type_ < states[idx // 2]:
+            # user loosened a restriction - this isn't possible!
+            is_valid = False
+
+    return states, is_valid
+
+
 def main() -> None:
     """
     The main function for using the app. Handles user interaction. Also prints
@@ -140,6 +169,9 @@ def main() -> None:
 
     r: int = 0
     filters: list = []
+
+    # keep track of states (. = 0, _ = 1, ! = 2)
+    states: list = [0, 0, 0, 0, 0]
 
     print(WELCOME_MESSAGE)
 
@@ -154,7 +186,13 @@ def main() -> None:
 
             if feedback.lower() == "r":
                 another_guess = make_guess(wordlist, filters)
-                print("Another guess:", another_guess)
+                print("Another guess:", another_guess[0])
+                continue
+
+            states, valid_states = adjust_states(states, feedback)
+
+            if not valid_states:
+                print("You loosened a character restriction. Revise input.")
                 continue
 
             new_filters = generate_filters_from_feedback(feedback)
