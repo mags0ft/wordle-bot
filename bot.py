@@ -4,9 +4,10 @@ guesses, and generating filters from feedback.
 """
 
 import json
+import os
 import random
 
-WORDLIST_FILENAME = "wordlists/wordlist-en.json"
+WORDLIST_FILENAME = os.path.join("wordlists", "wordlist-en.json")
 
 WELCOME_MESSAGE = """Welcome to the Wordle solving assistant!
 It will help you to solve fun little Wordle puzzles by making guesses.
